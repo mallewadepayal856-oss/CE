@@ -1,0 +1,123 @@
+//Verification of Sampling Theorem
+// 1 | Right Sampling / 2 | Under Sampling | 3 | Over Sampling
+
+clc;
+clear all;
+
+fm = input("Enter the input signal frequency: "); //10 or 100
+
+k = input("Enter the number of Cycles of input signal: "); //5 or 10
+
+A = input("Enter the amplitude of input signal: "); //1 or 2
+
+tm = 0:1/(fm * fm):k/fm;
+
+x = A * cos(2 * %pi * fm * tm);
+
+figure(1);
+
+a = gca();
+
+a.x_location = "origin";
+
+a.y_location = "origin";
+
+plot(tm, x);
+
+title("ORIGINAL SIGNAL");
+
+xlabel("Time");
+
+ylabel("Amplitude");
+
+xgrid(1)
+
+// Sampling Rate (Nyquist Rate) = 2 * fm
+fnyq = 2 * fm;
+
+//UNDER SAMPLING
+fs = (3/4) * fnyq;
+
+n = 0:1/fs:k/fm;
+
+xn = A * cos(2 * %pi * fm * n);
+
+figure(2);
+
+a = gca();
+
+a.x_location = "origin";
+
+a.y_location = "origin";
+
+plot2d3("gnn", n, xn);
+
+plot(n, xn, "r");
+
+title("Under Sampling");
+
+xlabel("Time");
+
+ylabel("Amplitude");
+
+legend("Sampled Signal", "Reconstructed Signal");
+
+xgrid(1)
+
+//NYQUIST SAMPLING
+fs = fnyq;
+
+n = 0:1/fs:k/fm;
+
+xn = A * cos(2 * %pi * fm * n);
+
+figure(3);
+
+a = gca();
+
+a.x_location = "origin";
+
+a.y_location = "origin";
+
+plot2d3("gnn", n, xn);
+
+plot(n, xn, "r");
+
+title("Nyquist Sampling");
+
+xlabel("Time");
+
+ylabel("Amplitude");
+
+legend("Sampled Signal", "Reconstructed Signal");
+
+xgrid(1)
+
+//OVER SAMPLING
+fs = fnyq * 10;
+
+n = 0:1/fs:k/fm;
+
+xn = A * cos(2 * %pi * fm * n);
+
+a = gca();
+
+figure(4);
+
+a.x_location = "origin";
+
+a.y_location = "origin";
+
+plot2d3("gnn", n, xn);
+
+plot(n, xn, "r");
+
+title("Over Sampling");
+
+xlabel("Time");
+
+ylabel("Amplitude");
+
+legend("Sampled Signal", "Reconstructed Signal");
+
+xgrid(1)
