@@ -1,0 +1,45 @@
+//Program for Signal to Noise Ratio in dB for PCM
+
+clc;
+clear;
+
+//Signal to Noise Ratio in dB for PCM
+
+n = input("Enter the number of bits to encoder: ");
+
+// Formula for non-sinusoidal signal
+SNRo = 4.8 + 6*n;
+
+// Note: For a sinusoidal signal, the formula would be:
+// SNRo = 1.8 + 6*n;
+
+disp("Output Signal to Noise Ratio in dB for PCM: ");
+
+disp(SNRo);
+
+
+
+
+
+
+//b
+
+//Program for Signal to Noise Ratio in dB for DM
+
+clc;
+clear;
+
+//Signal to Noise Ratio in dB for DM
+
+fm = input("Enter the modulating frequency in Hz: ");
+fs = input("Enter the sampling frequency in samples/second: ");
+
+ts = 1/fs; //sampling interval
+
+fM = fm;
+
+SNR = 3 / (8 * (%pi^2) * (fm^2) * fM * (ts^3));
+
+SNR_dB = 10 * log10(SNR);
+
+disp(SNR_dB, "Maximum Output Signal to Noise Ratio for Delta Modulation in dB: ");
